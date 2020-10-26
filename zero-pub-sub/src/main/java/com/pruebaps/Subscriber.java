@@ -26,8 +26,9 @@ public class Subscriber
             //Conecta el socket a un puerto
             //subscriber.connect("tcp://localhost:5556");
             //Prueba red domestica
-            //subscriber.connect("tcp://192.168.0.14:5556");
-            subscriber.connect("tcp://25.77.197.91:5556");
+            subscriber.connect("tcp://192.168.0.14:5557");
+            subscriber.connect("ipc://weather");
+            //subscriber.connect("tcp://25.77.197.91:5556");
             String filter = (args.length > 0) ? args[0] : "10001 ";
             //Se suscribe con codigo especial que le permitira filtar los mensajes del publicador
             subscriber.subscribe(filter.getBytes(ZMQ.CHARSET));

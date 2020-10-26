@@ -22,7 +22,7 @@ public class Publisher
             //Crea un socket tipo PUB
             ZMQ.Socket publisher = context.createSocket(SocketType.PUB);
             //Ata el socket a un puerto
-            publisher.bind("tcp://*:5556");
+            publisher.bind("tcp://*:5557");
             publisher.bind("ipc://weather");
 
             //  Inicializa los numeros al azar
