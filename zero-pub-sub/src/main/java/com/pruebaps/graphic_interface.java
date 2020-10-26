@@ -1,4 +1,4 @@
-package com.pruebacs;
+package com.pruebaps;
 
 import java.awt.EventQueue;
 
