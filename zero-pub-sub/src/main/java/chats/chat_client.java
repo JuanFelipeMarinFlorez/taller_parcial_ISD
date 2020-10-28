@@ -32,7 +32,8 @@ public static void main(String[] args) {
 			"\n" + "Artista : " + publicacion.getN_artista() +
 			"\n" + "Mensaje : " + publicacion.getMensaje() +
 			"\n" + "Publicado el " + publicacion.getFecha() +
-			"\n" + "A las: " + publicacion.getHora();
+			"\n" + "A las: " + publicacion.getHora() + "\n"
+			+ "\n";
 	
 	EventQueue.invokeLater(new Runnable() {
 		public void run() {
@@ -61,7 +62,7 @@ private chat_client() {
 	JTextArea msg_area = new JTextArea();
 	msg_area.setBackground(new Color(255, 228, 225));
 	msg_area.setEditable(false);
-	msg_area.setBounds(227, 46, 217, 226);
+	msg_area.setBounds(185, 46, 259, 226);
 	contentPane.add(msg_area);
 	
 	JCheckBox chckbxNewCheckBox = new JCheckBox("Artista1");
@@ -84,14 +85,14 @@ private chat_client() {
 	title2.setBackground(new Color(255, 228, 225));
 	title2.setText("                Crick de Artistas");
 	title2.setEditable(false);
-	title2.setBounds(227, 6, 217, 30);
+	title2.setBounds(185, 6, 259, 30);
 	contentPane.add(title2);
 	
 	JTextArea Title1 = new JTextArea();
 	Title1.setBackground(new Color(255, 228, 225));
-	Title1.setText("                    Artistas");
+	Title1.setText("          Artistas");
 	Title1.setEditable(false);
-	Title1.setBounds(6, 6, 217, 30);
+	Title1.setBounds(6, 6, 167, 30);
 	contentPane.add(Title1);
 }
 
@@ -108,7 +109,8 @@ private chat_client(String texto) {
 	JTextArea msg_area = new JTextArea();
 	msg_area.setBackground(new Color(255, 228, 225));
 	msg_area.setEditable(false);
-	msg_area.setText(texto);
+	msg_area.append(texto);
+	msg_area.setAutoscrolls(true);
 	texto = msg_area.getText();
 	msg_area.setBounds(227, 46, 217, 226);
 	contentPane.add(msg_area);
