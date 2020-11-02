@@ -22,21 +22,16 @@ public class Publisher
             //Crea un socket tipo PUB
             ZMQ.Socket publisher = context.createSocket(SocketType.PUB);
             //Ata el socket a un puerto
-            publisher.bind("tcp://*:5557");
-            publisher.bind("ipc://weather");
-
-            //  Inicializa los numeros al azar
+            publisher.bind("tcp://*:5558");
+            publisher.bind("ipc://Selena3");
             Random srandom = new Random(System.currentTimeMillis());
             while (!Thread.currentThread().isInterrupted()) {
                 //  Obtiene los valores
-                int zipcode, temperature, relhumidity;
+                Crick mensaje= new Crick("Selena Gomez", "Unete a Pantene y notarás la diferencia");
+                int zipcode;
                 zipcode = 10000 + srandom.nextInt(10000);
-                temperature = srandom.nextInt(215) - 80 + 1;
-                relhumidity = srandom.nextInt(50) + 10 + 1;
-
-                // Crea el mensaje en cadena de caracteres
                 String update = String.format(
-                    "%05d %d %d", zipcode, temperature, relhumidity
+                    "%05d %s ", zipcode, mensaje.toString()
                 );
                 //Envia el mensaje a todos los suscriptores
                 publisher.send(update, 0);

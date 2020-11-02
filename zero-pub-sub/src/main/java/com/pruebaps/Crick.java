@@ -26,6 +26,7 @@ public class Crick {
 	private LocalDateTime now = LocalDateTime.now();
 	private String fecha;
 	private String hora;
+	private String mensaje;
 	
 	public String getHora() {
 		return hora;
@@ -35,7 +36,7 @@ public class Crick {
 		this.hora = hora;
 	}
 
-	private String mensaje;
+	
 	
 	
 	// Set y get
@@ -56,6 +57,10 @@ public class Crick {
 	}
 	public void setMensaje(String mensaje) {
 		this.mensaje = mensaje;
+	}
+
+	public String toString(){
+		return n_artista+ " / "+ fecha + " / "+ hora + " / "+  mensaje ;
 	}
 
 }

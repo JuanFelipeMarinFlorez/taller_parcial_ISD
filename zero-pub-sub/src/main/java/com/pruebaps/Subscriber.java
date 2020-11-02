@@ -26,9 +26,9 @@ public class Subscriber
             //Conecta el socket a un puerto
             //subscriber.connect("tcp://localhost:5556");
             //Prueba red domestica
-            //subscriber.connect("tcp://192.168.0.14:5556");
-            subscriber.connect("tcp://25.77.197.91:5556");
-            subscriber.connect("ipc://weather");
+            subscriber.connect("tcp://192.168.0.14:5558");
+            //subscriber.connect("tcp://25.77.197.91:5556");
+            subscriber.connect("ipc://Selena3");
             String filter = (args.length > 0) ? args[0] : "10001 ";
             //Se suscribe con codigo especial que le permitira filtar los mensajes del publicador
             subscriber.subscribe(filter.getBytes(ZMQ.CHARSET));
@@ -36,27 +36,17 @@ public class Subscriber
             //  Procesa 100 actualizaciones
             int update_nbr;
             long total_temp = 0;
+            
+            
             for (update_nbr = 0; update_nbr < 100; update_nbr++) {
                 //Recibe el mensaje en cadena de caracteres
                 //Remueve el caracter '0' de la cola
-                String string = subscriber.recvStr(0).trim();
+                String string = subscriber.recvStr();
+                System.out.println( string );
                 
-                //Saca el mensaje
-                StringTokenizer sscanf = new StringTokenizer(string, " ");
-                int zipcode = Integer.valueOf(sscanf.nextToken());
-                int temperature = Integer.valueOf(sscanf.nextToken());
-                int relhumidity = Integer.valueOf(sscanf.nextToken());
-
-                total_temp += temperature;
             }
 
-            System.out.println(
-                String.format(
-                    "Average temperature for zipcode '%s' was %d.",
-                    filter,
-                    (int)(total_temp / update_nbr)
-                )
-            );
+            
         }
     }
 }
