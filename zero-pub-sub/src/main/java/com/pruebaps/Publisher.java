@@ -28,13 +28,21 @@ public class Publisher
             while (!Thread.currentThread().isInterrupted()) {
                 //  Obtiene los valores
                 Crick mensaje= new Crick("Selena Gomez", "Unete a Pantene y notarás la diferencia");
+                Crick mensaje2= new Crick("Selena Gomez", "amo aun a justin");
                 int zipcode;
-                zipcode = 10000 + srandom.nextInt(10000);
+                zipcode = 10001;
                 String update = String.format(
                     "%05d %s ", zipcode, mensaje.toString()
                 );
                 //Envia el mensaje a todos los suscriptores
                 publisher.send(update, 0);
+                zipcode = 10002;
+                update = String.format(
+                    "%05d %s ", zipcode, mensaje2.toString()
+                );
+                //Envia el mensaje a todos los suscriptores
+                publisher.send(update, 0);
+                
             }
         }
     }
