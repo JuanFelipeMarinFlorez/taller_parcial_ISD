@@ -15,34 +15,58 @@ import org.zeromq.ZContext;
 //
 public class Publisher
 {
-    public static void main(String[] args) throws Exception
-    {
+	String[] artistas = new String[4];
+	String[] mensajes = new String[4];
+	
+	
+	
+	public String[] getArtistas() {
+		return artistas;
+	}
+	public void setArtistas(String[] artistas) {
+		this.artistas = artistas;
+	}
+	public String[] getMensajes() {
+		return mensajes;
+	}
+	public void setMensajes(String[] mensajes) {
+		this.mensajes = mensajes;
+	}
+	public Publisher() {
+		for (int i=0; i<4; i++) {
+    		artistas[i]= new String();
+    		mensajes[i]= new String();
+        }     
+		
+	}
+	 public void  newMessage(String artista, String mensaje) {
+	    	for (int i=0; i<4; i++) {
+	        	if(artistas[i]==artista) {
+	        		mensajes[i]=mensaje;
+	        		
+	        	}
+	    	}
+	    }	
+    public void publicar(){
         //Establece el ambiente o contexto zeromq
         try (ZContext context = new ZContext()) {
             //Crea un socket tipo PUB
             ZMQ.Socket publisher = context.createSocket(SocketType.PUB);
             //Ata el socket a un puerto
             publisher.bind("tcp://*:5558");
-            publisher.bind("ipc://Selena3");
+            publisher.bind("ipc://Cricks");
             Random srandom = new Random(System.currentTimeMillis());
-            while (!Thread.currentThread().isInterrupted()) {
-                //  Obtiene los valores
-                Crick mensaje= new Crick("Selena Gomez", "Unete a Pantene y notarás la diferencia");
-                Crick mensaje2= new Crick("Selena Gomez", "amo aun a justin");
-                int zipcode;
-                zipcode = 10001;
-                String update = String.format(
-                    "%05d %s ", zipcode, mensaje.toString()
-                );
-                //Envia el mensaje a todos los suscriptores
-                publisher.send(update, 0);
-                zipcode = 10002;
-                update = String.format(
-                    "%05d %s ", zipcode, mensaje2.toString()
-                );
-                //Envia el mensaje a todos los suscriptores
-                publisher.send(update, 0);
-                
+            while (true) {
+            	
+            	for (int i=0; i<4; i++) {
+            		if(!mensajes[i].isEmpty()) {
+            			String update = String.format(
+                                "%s %s ", artistas[i], mensajes[i]
+                            );
+            			publisher.send(update, 0);
+            			mensajes[i]="";
+            		}
+            	}
             }
         }
     }

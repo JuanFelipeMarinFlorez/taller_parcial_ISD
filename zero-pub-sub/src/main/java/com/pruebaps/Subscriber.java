@@ -13,41 +13,76 @@ import org.zeromq.ZContext;
 //  Connects SUB socket to tcp://localhost:5556
 //  Collects weather updates and finds avg temp in zipcode
 //
-public class Subscriber
-{
-    public static void main(String[] args)
-    {
-        //Establece el ambiente o contexto zeromq
-        try (ZContext context = new ZContext()) {
-            //  Socket to talk to server
-            System.out.println("Collecting updates from weather server");
-            //Crea un socket tipo SUB
-            ZMQ.Socket subscriber = context.createSocket(SocketType.SUB);
-            //Conecta el socket a un puerto
-            //subscriber.connect("tcp://localhost:5556");
-            //Prueba red domestica
-            subscriber.connect("tcp://192.168.0.14:5558");
-            //subscriber.connect("tcp://25.77.197.91:5556");
-            subscriber.connect("ipc://Selena3");
-            String filter = (args.length > 0) ? args[0] : "10001 ";
-            String filter2 = (args.length > 0) ? args[0] : "10002 ";
-            //Se suscribe con codigo especial que le permitira filtar los mensajes del publicador
-            subscriber.subscribe(filter.getBytes(ZMQ.CHARSET));
-            subscriber.subscribe(filter2.getBytes(ZMQ.CHARSET));
-            //  Procesa 100 actualizaciones
-            int update_nbr;
-            long total_temp = 0;
-            
-            
-            for (update_nbr = 0; update_nbr < 100; update_nbr++) {
-                //Recibe el mensaje en cadena de caracteres
-                //Remueve el caracter '0' de la cola
-                String string = subscriber.recvStr();
-                System.out.println( string );
-                
-            }
+public class Subscriber{
+	
+	String[] artistas = new String[4];
+	
+	
+	/*
+	 * constructor de Subscriber
+	 * crea los artistas vacios.
+	 */
+    public Subscriber() {
+    	for (int i=0; i<4; i++) {
+    		artistas[i]= new String();
+        }     
+	}
+    
+    
+    
+    public String[] getArtistas() {
+		return artistas;
+	}
 
-            
-        }
+
+
+	public void setArtistas(String[] artistas) {
+		this.artistas = artistas;
+	}
+
+
+
+	public void  newSubscription(String artista) {
+    	for (int i=0; i<4; i++) {
+        	if(artistas[i].isEmpty()) {
+        		artistas[i]=artista;
+        		
+        	}
+    	}
     }
+    
+    public void deleteSubscription(String artista) {
+    	for (int i=0; i<4; i++) {
+    		if(artistas[i]== artista) {
+    			artistas[i]="";
+    		}
+    	}
+    }
+    public void subcripcion(){
+    	
+    		try (ZContext context = new ZContext()) {
+    			ZMQ.Socket subscriber = context.createSocket(SocketType.SUB);
+                subscriber.connect("tcp://192.168.0.14:5558");
+                //subscriber.connect("tcp://25.77.197.91:5556");
+                subscriber.connect("ipc://Cricks");
+    			while(true) {
+	                //  Socket to talk to server
+	                System.out.println("Collecting updates from weather server");
+	                for (int i=0; i<4; i++) {
+	                	if( ! artistas[i].isEmpty()) {
+	                		subscriber.subscribe(artistas[i].getBytes(ZMQ.CHARSET));
+	                		
+	                	}
+	                }         
+	                String string = subscriber.recvStr();
+	                System.out.println( string );
+	              
+    			}
+    			
+    		}
+    	
+    	
+    	
+    }
+
 }
