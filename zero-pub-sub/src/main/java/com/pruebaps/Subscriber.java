@@ -33,7 +33,7 @@ public class Subscriber
             String filter2 = (args.length > 0) ? args[0] : "10002 ";
             //Se suscribe con codigo especial que le permitira filtar los mensajes del publicador
             subscriber.subscribe(filter.getBytes(ZMQ.CHARSET));
-            //subscriber.subscribe(filter2.getBytes(ZMQ.CHARSET));
+            subscriber.subscribe(filter2.getBytes(ZMQ.CHARSET));
             //  Procesa 100 actualizaciones
             int update_nbr;
             long total_temp = 0;

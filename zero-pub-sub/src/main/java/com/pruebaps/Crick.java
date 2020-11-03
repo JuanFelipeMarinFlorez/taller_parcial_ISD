@@ -62,5 +62,21 @@ public class Crick {
 	public String toString(){
 		return n_artista+ " / "+ fecha + " / "+ hora + " / "+  mensaje ;
 	}
+	
+	public String transform(String mensaje) {
+		 String mensaje2= new String();
+			int counter=0;
+			for (int n = 0; n <mensaje.length(); n++) {
+				 System.out.println (mensaje2); 
+				while(counter<50) {
+					mensaje2 += String.valueOf(mensaje.charAt(n)); 
+				}
+				mensaje2+="\n";
+				mensaje2 += String.valueOf(mensaje.charAt(n)); 
+				counter=0;
+				 
+			}
+			return mensaje2;
+		}
 
 }
