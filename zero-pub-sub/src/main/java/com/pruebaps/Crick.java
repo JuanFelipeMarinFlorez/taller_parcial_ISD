@@ -60,7 +60,7 @@ public class Crick {
 	}
 
 	public String toString(){
-		return n_artista+ "\n  "+ fecha + "\n  "+ hora +"\n  "+mensaje ;
+		return "\n  "+ fecha + "\n  "+ hora +"\n  "+mensaje ;
 	}
 	
 	public String transform(String mensaje) {
