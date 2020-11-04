@@ -85,7 +85,7 @@ public class chat_server extends JFrame {
 		msg_send.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Crick mensajito = new Crick((String)spinner.getValue(),msg_text.getText());
-				meterinfo(mensajito.toString());
+				meterinfo((String)spinner.getValue()+mensajito.toString());
 				pub.newMessage((String)spinner.getValue(), mensajito.toString());
 				msg_text.setText("");
 			}
