@@ -138,7 +138,7 @@ public class Subscriber extends Thread{
 	               // System.out.println("Collecting updates from weather server");
 	               
 	                mensaje = subscriber.recvStr(0).trim();
-	    	        System.out.println ("Entrada \"" + mensaje +"\"");
+	    	        
 	                if( ! menInicial.equals(mensaje)) {
 	        			msg_area.setText(msg_area.getText() + '\n'
 		                        + mensaje);
