@@ -115,7 +115,7 @@ public class Subscriber extends Thread{
     	
     		try (ZContext context = new ZContext()) {
     			subscriber = context.createSocket(SocketType.SUB);
-                subscriber.connect("tcp://192.168.0.14:5558");
+                subscriber.connect("tcp://192.168.0.14:5559");
                 //subscriber.connect("tcp://25.77.197.91:5556");
                 subscriber.connect("ipc://Cricks");
     			while(true) {
@@ -127,11 +127,11 @@ public class Subscriber extends Thread{
 	                	if( ! artistas[i].isEmpty()) {
 	                		subscriber.subscribe(artistas[i].getBytes(ZMQ.CHARSET));
 	                		mensaje = subscriber.recvStr(0).trim();
-	    	                
+	    	                System.out.println ("Entrada \"" + mensaje +"\"");
 	                	}
 	                } 
 	                
-	                if(!menInicial.equals( "")) {
+	                if( ! menInicial.equals(mensaje)) {
 	        			msg_area.setText(msg_area.getText() + '\n'
 		                        + mensaje);
 	        			menInicial=mensaje;

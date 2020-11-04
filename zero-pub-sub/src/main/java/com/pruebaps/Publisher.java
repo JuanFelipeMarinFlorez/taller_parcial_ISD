@@ -52,7 +52,7 @@ public class Publisher extends Thread{
             //Crea un socket tipo PUB
             ZMQ.Socket publisher = context.createSocket(SocketType.PUB);
             //Ata el socket a un puerto
-            publisher.bind("tcp://*:5558");
+            publisher.bind("tcp://*:5559");
             publisher.bind("ipc://Cricks");
             while (true) {
             	

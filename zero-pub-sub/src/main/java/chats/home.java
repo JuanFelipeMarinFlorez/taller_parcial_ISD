@@ -58,9 +58,11 @@ public class home extends JFrame {
 		Publisher pub= new Publisher();	
 		pub.start();
 		pub.setArtistas(new String[] {"Shakira ","Bad Bunny","Juanes","Maluma"});
+		
 		JButton msg_send = new JButton("Artista");
 		msg_send.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+		
 				chat_server artista = new chat_server(pub);
 				artista.setVisible(true);
 			}
