@@ -129,7 +129,7 @@ public class Subscriber extends Thread{
     	
     		try (ZContext context = new ZContext()) {
     			subscriber = context.createSocket(SocketType.SUB);
-                subscriber.connect("tcp://25.66.29.221:5559");
+                subscriber.connect("tcp://25.78.216.158:5559");
                 //subscriber.connect("tcp://25.77.197.91:5556");
                 subscriber.connect("ipc://Cricks");
     			while(true) {
