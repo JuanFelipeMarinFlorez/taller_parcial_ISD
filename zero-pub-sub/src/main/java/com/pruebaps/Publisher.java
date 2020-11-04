@@ -13,8 +13,7 @@ import org.zeromq.ZContext;
 //  Ata el socket PUB a tcp://*:5556
 //  Publica actualizaciones del clima aleatorias
 //
-public class Publisher
-{
+public class Publisher extends Thread{
 	String[] artistas = new String[4];
 	String[] mensajes = new String[4];
 	
@@ -47,7 +46,7 @@ public class Publisher
 	        	}
 	    	}
 	    }	
-    public void publicar(){
+    public void run(){
         //Establece el ambiente o contexto zeromq
         try (ZContext context = new ZContext()) {
             //Crea un socket tipo PUB
@@ -55,7 +54,6 @@ public class Publisher
             //Ata el socket a un puerto
             publisher.bind("tcp://*:5558");
             publisher.bind("ipc://Cricks");
-            Random srandom = new Random(System.currentTimeMillis());
             while (true) {
             	
             	for (int i=0; i<4; i++) {

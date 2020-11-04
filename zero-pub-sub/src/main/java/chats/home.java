@@ -6,6 +6,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.pruebaps.Publisher;
+import com.pruebaps.Subscriber;
+
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
@@ -51,11 +55,13 @@ public class home extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+		Publisher pub= new Publisher();	
+		pub.start();
+		pub.setArtistas(new String[] {"Shakira ","Bad Bunny","Juanes","Maluma"});
 		JButton msg_send = new JButton("Artista");
 		msg_send.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				chat_server artista = new chat_server();
+				chat_server artista = new chat_server(pub);
 				artista.setVisible(true);
 			}
 		});
@@ -67,7 +73,8 @@ public class home extends JFrame {
 		JButton msg_send_1 = new JButton("Suscriptor");
 		msg_send_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				chat_client suscriptor = new chat_client();
+				Subscriber sub= new Subscriber();
+				chat_client suscriptor = new chat_client(sub);
 				suscriptor.setVisible(true);
 			}
 		});

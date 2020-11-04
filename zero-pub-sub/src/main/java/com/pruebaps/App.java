@@ -8,7 +8,7 @@ import java.util.Scanner;
  */
 public class App 
 {
-    public static void main( String[] args )
+    public static void main( String[] args ) throws Exception
     {
     	
     	 System.out.println ("Por favor introduzca una cadena por teclado:");
@@ -23,13 +23,13 @@ public class App
             String [] art={"Shakira","Juanes","Maluma","BadBunny"};
             publicador.setArtistas(art);
             publicador.newMessage("Shakira", "hola miamiiii");
-            publicador.publicar();
+            publicador.start();
             publicador.newMessage("Shakira", "waka waka");
         }
         else {
         	Subscriber sub= new Subscriber();
         	sub.newSubscription("Shakira");
-        	sub.subcripcion();
+        	sub.start();
         }
         
     }
