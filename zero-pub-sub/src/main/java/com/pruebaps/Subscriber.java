@@ -101,7 +101,14 @@ public class Subscriber extends Thread{
         		encontrado=true;
         		
         	}
-    	}
+		}
+		for (int i=0; i<4; i++) {
+	                	 
+			if( ! artistas[i].isEmpty()) {
+				subscriber.subscribe(artistas[i].getBytes(ZMQ.CHARSET));
+				
+			}
+		} 
     }
     
     public void deleteSubscription(String artista) {
@@ -109,7 +116,14 @@ public class Subscriber extends Thread{
     		if(artistas[i]== artista) {
     			artistas[i]="";
     		}
-    	}
+		}
+		for (int i=0; i<4; i++) {
+	                	 
+			if( ! artistas[i].isEmpty()) {
+				subscriber.subscribe(artistas[i].getBytes(ZMQ.CHARSET));
+				
+			}
+		} 
     }
     public void run(){
     	
@@ -122,15 +136,9 @@ public class Subscriber extends Thread{
   
 	                //  Socket to talk to server
 	               // System.out.println("Collecting updates from weather server");
-	               for (int i=0; i<4; i++) {
-	                	 
-	                	if( ! artistas[i].isEmpty()) {
-	                		subscriber.subscribe(artistas[i].getBytes(ZMQ.CHARSET));
-	                		mensaje = subscriber.recvStr(0).trim();
-	    	                System.out.println ("Entrada \"" + mensaje +"\"");
-	                	}
-	                } 
-	                
+	               
+	                mensaje = subscriber.recvStr(0).trim();
+	    	        System.out.println ("Entrada \"" + mensaje +"\"");
 	                if( ! menInicial.equals(mensaje)) {
 	        			msg_area.setText(msg_area.getText() + '\n'
 		                        + mensaje);
